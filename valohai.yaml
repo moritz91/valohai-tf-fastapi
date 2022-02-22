@@ -1,13 +1,30 @@
 - step:
     name: train-model
-    command: python train.py
     image: tensorflow/tensorflow:2.6.0
+    command: 
+      - pip install -r requirements.txt
+      - python train.py
+    parameters:
+    - name: learning_rate
+      default: 0.001
+      multiple-separator: ','
+      optional: false
+      type: float
+    - name: epoch
+      default: 10
+      multiple-separator: ','
+      optional: false
+      type: integer
+    inputs:
+    - name: dataset
+      default: https://valohaidemo.blob.core.windows.net/mnist/mnist.npz
+      optional: false
 - endpoint:
     name: digits
     description: predict digits from image inputs
+    files:
+    - name: model
+      description: Model output file from TensorFlow
+      path: model.h5
     image: tiangolo/uvicorn-gunicorn-fastapi:python3.7
     server-command: uvicorn predict:app --host 0.0.0.0 --port 8000
-    files:
-        - name: model
-          description: Model output file from TensorFlow
-          path: model.h5

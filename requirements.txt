@@ -1,10 +1,4 @@
-requirements.txt
-
-:Author: Moritz Giller
-:Email: @HBL1260W
-:Date: 2022-02-22 18:08
-
 valohai-utils
-tensorflow==2.4.1
+tensorflow==2.6
 Pillow
 python-multipart
