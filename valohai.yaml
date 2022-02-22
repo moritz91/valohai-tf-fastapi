@@ -1,0 +1,13 @@
+- step:
+    name: train-model
+    command: python train.py
+    image: tensorflow/tensorflow:2.6.0
+- endpoint:
+    name: digits
+    description: predict digits from image inputs
+    image: tiangolo/uvicorn-gunicorn-fastapi:python3.7
+    server-command: uvicorn predict:app --host 0.0.0.0 --port 8000
+    files:
+        - name: model
+          description: Model output file from TensorFlow
+          path: model.h5
