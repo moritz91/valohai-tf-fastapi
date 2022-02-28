@@ -1,5 +1,4 @@
 valohai-utils
-tensorflow==2.6
-keras==2.6
+tensorflow==2.5.1
 Pillow
 python-multipart
